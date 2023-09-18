@@ -1,35 +1,65 @@
 <?php
-require_once "class/Person.php";
-require_once "class/Student.php";
+$host = "localhost";
+$db = "31b";
+$user = "root";
+$password = "";
 
+$dsn = "mysql:host=$host;dbname=$db;charset=UTF8";
 
+global $oPDO;
+try {
+    $oPDO = new PDO($dsn, $user, $password);
+    if ($oPDO) {
+        echo "Connected to the $db database successfully";
+    }
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
 
-$peter= new Person("peter");
+require_once "class/Livre.php";
 
-// $peter->setName("Peter toto");
-echo $peter->getName();
+// Créez une instance de la classe Livre
+$olivre = new Livre();
 
-// echo $peter->address; ne fonctionne pas vu que l'adresse est en private
-// $peter->address="12 montreal";
-
-$yacine=new Student("Je suis yacine");
+// Exécutez une requête SQL pour récupérer les livres
+$livres = $olivre->getLivres();
 echo "<br>";
-echo $yacine->getName();
 echo "<br>";
-$yacine->setStudentId(1);
-echo $yacine-> getStudentId();
+var_dump($livres);
 
 echo "<br>";
 echo "<br>";
+var_dump($livres[0]);
 
-require_once "class/Shapes.php";
+// echo "<br>";
+// echo "<br>";
+// $livre = $olivre->getLivreById(1);
+// var_dump($livre);
 
-$circle=new Circle(2);
-echo "Radius: " . $circle->calcArea();
+// echo "<br>";
+// echo "<br>";
+// $alivre_to_insert=[
+//     'titre'=>"titre de mon livre",
+//     'auteur'=>"yacine",
+//     'annee'=>2023
+// ];
+// $livre_added=$olivre->ajouterLivre($alivre_to_insert);
+// var_dump($livres);
+
+// echo "<br>";
+// echo "<br>";
+// $alivre_to_update = [
+//     'titre' => "titre de mon livre modifié",
+//     'auteur' => "yacine",
+//     'annee' => 2023
+// ];
+// $livre = $olivre->updateLivreById(10, $alivre_to_update);
+// var_dump($livres);
 
 echo "<br>";
+echo "<br>";
 
-$rectangle=new Rectangle(10,15);
-echo "Rectangle: " . $rectangle->calcArea();
+$livre = $olivre->deleteLivreById(13);
 
+var_dump($livre);
 ?>

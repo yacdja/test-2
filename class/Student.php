@@ -6,11 +6,9 @@ class Student  extends Person{
         $this->studentId = $studentId;
     }
 
-
     public function getStudentId(){
        return $this->studentId;
-}
-
+    }
 }
 
 ?>

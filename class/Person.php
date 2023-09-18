@@ -1,5 +1,5 @@
 <?php
-class Person{
+abstract class Person{
     private $name;
     private $address;
     public $zipCode;
